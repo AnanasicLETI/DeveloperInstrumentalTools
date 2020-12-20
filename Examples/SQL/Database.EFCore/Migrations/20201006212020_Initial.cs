@@ -9,12 +9,12 @@ namespace Database.EFCore.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Summary",
+                name: "AdvertType",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Code = table.Column<string>(nullable: true)
+                    Type = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -22,66 +22,62 @@ namespace Database.EFCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Weather",
+                name: "Advert",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    SummaryId = table.Column<int>(nullable: true),
-                    Date = table.Column<DateTime>(nullable: false),
-                    Temperature = table.Column<decimal>(nullable: false)
+                    TypeId = table.Column<int>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
+                    PhotoUrl = table.Column<string>(nullable: false),
+                    TimeStamp = table.Column<DateTime>(nullable: false),
+                    Price = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Weather", x => x.Id);
+                    table.PrimaryKey("PK_Advert", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Weather_Summary_SummaryId",
-                        column: x => x.SummaryId,
-                        principalTable: "Summary",
+                        name: "FK_Advert_AdvertType_TypeId",
+                        column: x => x.TypeId,
+                        principalTable: "AdvertType",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
-                table: "Summary",
-                columns: new[] { "Id", "Code" },
+                table: "AdvertType",
+                columns: new[] { "Id", "Type" },
                 values: new object[,]
                 {
-                    { 1, "Freezing" },
-                    { 2, "Bracing" },
-                    { 3, "Chilly" },
-                    { 4, "Cool" },
-                    { 5, "Mild" },
-                    { 6, "Warm" },
-                    { 7, "Balmy" },
-                    { 8, "Hot" },
-                    { 9, "Sweltering" },
-                    { 10, "Scorching" }
+                    { 1, "Buy" },
+                    { 2, "Sell" }
                 });
 
             migrationBuilder.InsertData(
-                table: "Weather",
-                columns: new[] { "Id", "Date", "SummaryId", "Temperature" },
+                table: "Advert",
+                columns: new[] { "Id", "TypeId", "Name", "PhotoUrl", "TimeStamp", "Price" },
                 values: new object[,]
                 {
-                    { 3, new DateTime(2020, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, -10m },
-                    { 1, new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, -1.3m },
-                    { 2, new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, 5.1m }
+                    { 1, 2, "CyberPank 2077","", new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2077 },
+                    { 2, 2, "1 btc","", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),  1700000 },
+                    { 3, 1, "Box of pineapples","", new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),  1500 }
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Weather_SummaryId",
-                table: "Weather",
-                column: "SummaryId");
+                name: "IX_Advert_TypeId",
+                table: "Advert",
+                column: "TypeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Weather");
+                name: "Advert"
+            );
 
             migrationBuilder.DropTable(
-                name: "Summary");
+                name: "AdvertType"
+            );
         }
     }
 }

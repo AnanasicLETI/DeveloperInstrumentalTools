@@ -5,8 +5,8 @@ using Database.EFCore.Entities;
 
 namespace Database.EFCore.Contracts
 {
-    public interface IWeatherDataAccess
+    public interface IAdvertDataAccess
     {
-        Task<IEnumerable<WeatherEntity>> GetAllAsync(CancellationToken ct = default);
+        Task<IEnumerable<AdvertEntity>> GetAllAsync(CancellationToken ct = default);
     }
 }
