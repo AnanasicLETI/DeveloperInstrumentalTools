@@ -18,7 +18,15 @@ services:
       - POSTGRES_MULTIPLE_DATABASES=exampledb
     networks:
       - internal
-
+  core:
+    container_name: 'advert.app'
+    build:
+      context: ../
+      dockerfile: core.dockerfile
+    ports:
+      - "5000:5000"
+    networks:
+      - internal
 networks:
   internal:
     driver: bridge

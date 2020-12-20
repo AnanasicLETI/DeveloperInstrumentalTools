@@ -33,8 +33,11 @@ namespace WebApplication.EFCore
             services.AddControllers();
             services.AddScoped<IAdvertDataAccess, AdvertDataAccess>();
             services.AddAutoMapper(typeof(MappingProfile));
-            services.AddDbContext<ExampleContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("ExampleDbContext")));
+            
+            string connString = Configuration.GetConnectionString("ExampleDbContext") ??
+                                "Host=postgres;Port=5432;Database=postgres;User ID=postgres;Password=root;";
+
+            services.AddDbContext<ExampleContext>(options => options.UseNpgsql(connString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
