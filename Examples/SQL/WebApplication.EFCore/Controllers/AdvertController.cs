@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 namespace WebApplication.EFCore.Controllers
 {
     [ApiController]
-    [Route("advert")]
+    [Route("adverts")]
     public class AdvertController : ControllerBase
     {
         private ILogger<AdvertController> Logger { get; }

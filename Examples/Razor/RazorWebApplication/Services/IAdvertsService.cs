@@ -4,8 +4,8 @@ using RazorWebApplication.Models;
 
 namespace RazorWebApplication.Services
 {
-    public interface IWeatherForecastService
+    public interface IAdvertsService
     {
-        Task<IEnumerable<WeatherForecast>> GetWeatherForecasts();
+        Task<IEnumerable<Adverts>> GetAdverts();
     }
 }

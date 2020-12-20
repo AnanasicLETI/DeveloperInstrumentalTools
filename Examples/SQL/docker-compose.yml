@@ -27,6 +27,16 @@ services:
       - "5000:5000"
     networks:
       - internal
+  razor:
+    container_name: 'razor.app'
+    build:
+      context: ../
+      dockerfile: razor.dockerfile
+    ports:
+      - "80:80"
+    networks:
+      - internal
 networks:
   internal:
     driver: bridge
+    external: true

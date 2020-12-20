@@ -1,32 +1,38 @@
-@model WeatherForecast
+@model Adverts
 
 @{
-    ViewBag.Title = $"Weather forecast for {this.Model.TimeStamp}";
+    ViewBag.Title = $"Advert {this.Model.Name}";
     Layout = "_Layout";
 }
 
-<h3>Forecast for @this.Model.TimeStamp</h3>
+<h3>Advert @this.Model.Name</h3>
 <div class="container">
     <div class="row">
         <div class="col">
-            Temperature in C
+            Price in rub
         </div>
         <div class="col">
-            Temperature in F
+            Price in $
         </div>
         <div class="col">
-            Summary
+            Type
+        </div>
+        <div class="col">
+            timestamp
         </div>
     </div>
     <div class="row">
         <div class="col">
-            @this.Model.TemperatureCText
+            @this.Model.PriceRubText
         </div>
         <div class="col">
-            @this.Model.TemperatureFText
+            @this.Model.PriceDolText
         </div>
         <div class="col">
-            @this.Model.Summary
+            @this.Model.Type
+        </div>        
+        <div class="col">
+            @this.Model.TimeStamp
         </div>
     </div>
     <div class="row">
